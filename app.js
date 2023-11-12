@@ -13,7 +13,7 @@ let vueapp = new Vue({
                 name: "Maths Lesson",
                 location: "Mill Hill",
                 price: 200,
-                img: "/mathslesson.png",
+                img: "mathslesson.png",
                 text: "Maths icon",
                 invQuantity: 5
             },
@@ -22,7 +22,7 @@ let vueapp = new Vue({
                 name: "English Lesson",
                 location: "Hendon",
                 price: 120,
-                img: "/englishlesson.png",
+                img: "englishlesson.png",
                 text: "English icon",
                 invQuantity: 5
             },
@@ -31,7 +31,7 @@ let vueapp = new Vue({
                 name: "Chemistry Lesson",
                 location: "Mill Hill",
                 price: 150,
-                img: "/chemistry.png",
+                img: "chemistry.png",
                 text: "Chemistry icon",
                 invQuantity: 5
             },
@@ -40,7 +40,7 @@ let vueapp = new Vue({
                 name: "Biology Lesson",
                 location: "Colindale",
                 price: 120,
-                img: "/biology.png",
+                img: "biology.png",
                 text: "Biology icon",
                 invQuantity: 5
             },
@@ -49,7 +49,7 @@ let vueapp = new Vue({
                 name: "Physics Lesson",
                 location: "Colindale",
                 price: 150,
-                img: "/physics.png",
+                img: "physics.png",
                 text: "Physics icon",
                 invQuantity: 5
             },
@@ -58,7 +58,7 @@ let vueapp = new Vue({
                 name: "Geography Lesson",
                 location: "Colindale",
                 price: 90,
-                img: "/geography.png",
+                img: "geography.png",
                 text: "Geography icon",
                 invQuantity: 5
             },
@@ -67,7 +67,7 @@ let vueapp = new Vue({
                 name: "History Lesson",
                 location: "Cricklewood",
                 price: 99,
-                img: "/history.png",
+                img: "history.png",
                 text: "History icon",
                 invQuantity: 5
             },
@@ -76,7 +76,7 @@ let vueapp = new Vue({
                 name: "German Lesson",
                 location: "Watford",
                 price: 125,
-                img: "/german.png",
+                img: "german.png",
                 text: "German icon",
                 invQuantity: 5
             },
@@ -85,7 +85,7 @@ let vueapp = new Vue({
                 name: "Japanese Lesson",
                 location: "Borehamwood",
                 price: 165,
-                img: "/japanese.png",
+                img: "japanese.png",
                 text: "Japanese icon",
                 invQuantity: 5
             },
@@ -94,7 +94,7 @@ let vueapp = new Vue({
                 name: "Programming Lesson",
                 location: "London",
                 price: 150,
-                img: "/programming.png",
+                img: "programming.png",
                 text: "Programming icon",
                 invQuantity: 5
             }
