@@ -277,18 +277,6 @@ let vueapp = new Vue({
     }
 });
 
-// //Get form element
-// var form = document.getElementById("checkoutForm");
-// function submitForm(event){
-
-//    //Preventing page refresh
-//    event.preventDefault();
-// }
-
-// //Calling a function during form submission.
-// form.addEventListener('submit', submitForm);
-
-
 
 // // function to validate user inputs
 
