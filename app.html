@@ -54,7 +54,7 @@
 
         </div>
 
-        <!-- Contains each individual lesson block -->
+        <!-- Lesson page container -->
         <div class="cards" v-if="showProductsPage">
             <div v-for="(subject, subjectIndex) in subjects":key="subject.product_id">
                 <div class="lesson-container">
@@ -69,7 +69,7 @@
             </div>
         </div>
 
-        <!-- Checkout page -->
+        <!-- Checkout page container -->
         <div class="checkout-container" v-else>
 
             <div class="checkout-row" v-for="item in cart">
@@ -80,7 +80,7 @@
                 <button class="remove-cart" v-on:click="removeCartItem(item)">REMOVE</button>
             </div>
 
-            <!-- checkout form -->
+            <!-- checkout form container-->
             <div class="form-container">
                 <form name="checkout-form" id="checkoutForm" action="#">
                     <input type="text" name="cName" id="cName" placeholder="Full Name" oninput="validateForm()">
