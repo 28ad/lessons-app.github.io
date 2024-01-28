@@ -54,7 +54,7 @@
 
         </div>
 
-        <div class="wrap">
+        <div class="wrap" v-if="searchResults > 0">
             <div class="search">
                <input v-model="searchTerm" @input="searchLessons" type="text" class="searchTerm" placeholder="What are you looking for?">
                <button type="submit" class="searchButton">
