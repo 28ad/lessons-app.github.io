@@ -54,8 +54,35 @@
 
         </div>
 
+        <div class="wrap">
+            <div class="search">
+               <input v-model="searchTerm" @input="searchLessons" type="text" class="searchTerm" placeholder="What are you looking for?">
+               <button type="submit" class="searchButton">
+                 <i class="fa fa-search"></i>
+              </button>
+            </div>
+         </div>
+         
+         <!-- Display search results -->
+         <div class="cards" v-if="searchResults.length > 0">
+           
+             <div v-for="result in searchResults" :key="result._id">
+                <div class="lesson-container">
+                    <img v-bind:src="result.img" alt="Icon">
+                    <h2 v-text="result.name"></h2>
+                    <p v-text="result.location"></p>
+                    <p>£ {{result.price}}</p>
+                    <p>Spaces : {{result.invQuantity}} </p>
+                    <button class="addToBasket" v-on:click="addToCart(result, subjectIndex)" v-if="checkAvailability(result)">ADD LESSON</button>
+                    <button class="btn-disabled" disabled v-else>ADD LESSON</button>
+                </div>
+
+             </div>
+           
+         </div>
+
         <!-- Lesson page container -->
-        <div class="cards" v-if="showProductsPage">
+        <div class="cards" v-else-if="showProductsPage && searchResults.length == 0">
             <div v-for="(subject, subjectIndex) in subjects":key="subject.product_id">
                 <div class="lesson-container">
                     <img v-bind:src="subject.img" alt="Icon">
@@ -85,7 +112,7 @@
                 <form name="checkout-form" id="checkoutForm" action="#">
                     <input type="text" name="cName" id="cName" placeholder="Full Name" oninput="validateForm()">
                     <input type="text" name="cName" id="phonenumber" placeholder="Phone Number" oninput="validateForm()">
-                    <input type="submit" value="Checkout" disabled id="submitFormBtn" onclick="submitOrder()">
+                    <input type="submit" value="Checkout" disabled id="submitFormBtn" onclick="vueapp.submitOrderForm()">
                 </form>
             </div>
 

@@ -7,101 +7,24 @@ let vueapp = new Vue({
         locationSort: "Location",
         availabilitySort: "Spaces",
         priceSort: "Price",
-        subjects: [     // array containing all different lessons and their properties
-            {
-                product_id: 1,
-                name: "Maths Lesson",
-                location: "Mill Hill",
-                price: 200,
-                img: "/images/mathslesson.png",
-                text: "Maths icon",
-                invQuantity: 5
-            },
-            {
-                product_id: 2,
-                name: "English Lesson",
-                location: "Hendon",
-                price: 120,
-                img: "/images/englishlesson.png",
-                text: "English icon",
-                invQuantity: 5
-            },
-            {
-                product_id: 3,
-                name: "Chemistry Lesson",
-                location: "Mill Hill",
-                price: 150,
-                img: "/images/chemistry.png",
-                text: "Chemistry icon",
-                invQuantity: 5
-            },
-            {
-                product_id: 4,
-                name: "Biology Lesson",
-                location: "Colindale",
-                price: 120,
-                img: "/images/biology.png",
-                text: "Biology icon",
-                invQuantity: 5
-            },
-            {
-                product_id: 5,
-                name: "Physics Lesson",
-                location: "Colindale",
-                price: 150,
-                img: "/images/physics.png",
-                text: "Physics icon",
-                invQuantity: 5
-            },
-            {
-                product_id: 6,
-                name: "Geography Lesson",
-                location: "Colindale",
-                price: 90,
-                img: "/images/geography.png",
-                text: "Geography icon",
-                invQuantity: 5
-            },
-            {
-                product_id: 7,
-                name: "History Lesson",
-                location: "Cricklewood",
-                price: 99,
-                img: "/images/history.png",
-                text: "History icon",
-                invQuantity: 5
-            },
-            {
-                product_id: 8,
-                name: "German Lesson",
-                location: "Watford",
-                price: 125,
-                img: "/images/german.png",
-                text: "German icon",
-                invQuantity: 5
-            },
-            {
-                product_id: 9,
-                name: "Japanese Lesson",
-                location: "Borehamwood",
-                price: 165,
-                img: "/images/japanese.png",
-                text: "Japanese icon",
-                invQuantity: 5
-            },
-            {
-                product_id: 10,
-                name: "Programming Lesson",
-                location: "London",
-                price: 150,
-                img: "/images/programming.png",
-                text: "Programming icon",
-                invQuantity: 5
-            }
-        ],
+        searchTerm: '', // Add a property to store the search term
+        searchResults: [], // Add a property to store the search results
+        subjects: [], // array containing all different lessons and their properties
 
         // cart array initiated currently empty
         cart: []
+    },
+    // fetch to GET request for products
+    mounted: function () {
+        // Fetch data as soon as the homepage loads
+        fetch('http://localhost:3001/collections/products')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Data from MongoDB:', data);
+                // Use the data in your front-end application
+                this.subjects = data;
+            })
+            .catch(error => console.error('Error fetching data:', error));
     },
     methods: {
 
@@ -150,8 +73,9 @@ let vueapp = new Vue({
             } else {
                 // Cart has items, toggle between products and checkout page
                 this.showProductsPage = !this.showProductsPage;
+                console.log('Cart:', this.cart);
             }
-        
+
         },
 
         // function to remove selected index from cart array
@@ -178,7 +102,7 @@ let vueapp = new Vue({
             }
 
             // redirect user back to products page
-            if(this.cart.length === 0) {
+            if (this.cart.length === 0) {
                 this.showProductsPage = true;
             }
         },
@@ -249,10 +173,91 @@ let vueapp = new Vue({
                 this.subjects.sort((first, second) => second.price - first.price);
 
             }
-        }
-
-    },
-
+        },
+        // function to place order
+        submitOrderForm: function () {
+          
+            const fullName = document.getElementById("cName").value;
+            const phoneNumber = document.getElementById("phonenumber").value;
+          
+            // Ensure that fullName and phoneNumber are not empty
+            if (fullName.trim() === "" || phoneNumber.trim() === "") {
+              alert("Please fill in all the fields in the checkout form.");
+              return;
+            }
+          
+            const orderDetails = {
+              customerName: fullName,
+              phoneNumber: phoneNumber,
+              lessons: this.cart.reduce((result, item) => {
+                result[item._id] = {
+                  name: item.name,
+                  quantity: item.quantity,
+                };
+                return result;
+              }, {}),
+            };
+          
+            // Send the order details to the server for saving
+            fetch('http://localhost:3001/orders', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ orderDetails }),
+            })
+              .then(response => response.json())
+              .then(data => {
+                console.log('Order submitted successfully:', data);
+          
+                // If the order is submitted successfully, update lesson quantities
+                this.cart.forEach(item => {
+                  this.updateLessonQuantity(item._id, item.quantity);
+                });
+          
+              })
+              .catch(error => console.error('Error submitting order:', error));
+          },
+          
+        updateLessonQuantity: function (id, quantity) {
+            // Send a PUT request to update the lesson quantity
+            fetch(`http://localhost:3001/products/${id}`, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ quantity }),
+            })
+              .then(response => response.json())
+              .then(data => {
+                if (data.success) {
+                  console.log(`Lesson quantity updated successfully for lesson ${id}`);
+                } else {
+                  console.error(`Error updating lesson quantity for lesson ${id}:`, data.error);
+                }
+              })
+        },
+        searchLessons: function () {
+            // Use the searchTerm from the data property
+            const searchTerm = this.searchTerm.trim();
+        
+            if (searchTerm === '') {
+              // If the search term is empty, you might want to handle it accordingly
+              console.log('Search term is empty.');
+              return;
+            }
+        
+            // Perform the search using the updated searchTerm
+            fetch(`http://localhost:3001/search/${searchTerm}`)
+              .then(response => response.json())
+              .then(data => {
+                console.log('Search results:', data);
+                // Update the searchResults property to reflect the search results
+                this.searchResults = data;
+              })
+              .catch(error => console.error('Error searching lessons:', error));
+          },
+        },
 
     computed: {
 
@@ -287,10 +292,10 @@ function validateForm() {
 
     let nameInput = document.getElementById("cName").value;
     let phoneInput = document.getElementById("phonenumber").value;
-    
+
     let nameInputStyle = document.getElementById("cName");
     let phoneInputStyle = document.getElementById("phonenumber");
-    
+
     let submitFormBtn = document.getElementById("submitFormBtn");
 
     if (nameInput.trim() === "" || phoneInput.trim() === "" || !letters.test(nameInput) || !numbers.test(phoneInput)) {
@@ -309,8 +314,4 @@ function validateForm() {
 
 }
 
-// function to place order
 
-function submitOrder() {
-    alert("Order has been placed. Thank you !")
-}
