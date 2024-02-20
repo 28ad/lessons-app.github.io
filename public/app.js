@@ -17,7 +17,7 @@ let vueapp = new Vue({
     // fetch to GET request for products
     mounted: function () {
         // Fetch data as soon as the homepage loads
-        fetch('http://localhost:3001/collections/products')
+        fetch('https://webstore-restapi.onrender.com/collections/products')
             .then(response => response.json())
             .then(data => {
                 console.log('Data from MongoDB:', data);
@@ -199,7 +199,7 @@ let vueapp = new Vue({
             };
           
             // Send the order details to the server for saving
-            fetch('http://localhost:3001/orders', {
+            fetch('https://webstore-restapi.onrender.com/orders', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -221,7 +221,7 @@ let vueapp = new Vue({
           
         updateLessonQuantity: function (id, quantity) {
             // Send a PUT request to update the lesson quantity
-            fetch(`http://localhost:3001/products/${id}`, {
+            fetch(`https://webstore-restapi.onrender.com/products/${id}`, {
               method: 'PUT',
               headers: {
                 'Content-Type': 'application/json',
@@ -248,7 +248,7 @@ let vueapp = new Vue({
             }
         
             // Perform the search using the updated searchTerm
-            fetch(`http://localhost:3001/search/${searchTerm}`)
+            fetch(`https://webstore-restapi.onrender.com/search/${searchTerm}`)
               .then(response => response.json())
               .then(data => {
                 console.log('Search results:', data);
