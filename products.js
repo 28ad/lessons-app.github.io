@@ -4,7 +4,7 @@ let products = [
         name: "Maths Lesson",
         location: "Mill Hill",
         price: 200,
-        img: "frontend/images/mathslesson.png",
+        img: "images/mathslesson.png",
         text: "Maths icon",
         invQuantity: 5
     },
@@ -13,7 +13,7 @@ let products = [
         name: "English Lesson",
         location: "Hendon",
         price: 120,
-        img: "frontend/images/englishlesson.png",
+        img: "images/englishlesson.png",
         text: "English icon",
         invQuantity: 5
     },
@@ -22,7 +22,7 @@ let products = [
         name: "Chemistry Lesson",
         location: "Mill Hill",
         price: 150,
-        img: "frontend/images/chemistry.png",
+        img: "images/chemistry.png",
         text: "Chemistry icon",
         invQuantity: 5
     },
