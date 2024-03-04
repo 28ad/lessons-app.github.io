@@ -9,22 +9,29 @@ let vueapp = new Vue({
         priceSort: "Price",
         searchTerm: '', // Add a property to store the search term
         searchResults: [], // Add a property to store the search results
-        subjects: [], // array containing all different lessons and their properties
+        // subjects: [], // array containing all different lessons and their properties
+        subjects: products,
 
         // cart array initiated currently empty
         cart: []
     },
+    
     // fetch to GET request for products
-    mounted: function () {
-        // Fetch data as soon as the homepage loads
-        fetch('https://webstore-restapi.onrender.com/collections/products')
-            .then(response => response.json())
-            .then(data => {
-                console.log('Data from MongoDB:', data);
-                // Use the data in your front-end application
-                this.subjects = data;
-            })
-            .catch(error => console.error('Error fetching data:', error));
+    // mounted: function () {
+    //     // Fetch data as soon as the homepage loads
+    //     fetch('https://webstore-restapi.onrender.com/collections/products')
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             console.log('Data from MongoDB:', data);
+    //             // Use the data in your front-end application
+    //             this.subjects = data;
+    //         })
+    //         .catch(error => console.error('Error fetching data:', error));
+    // },
+    created: function() {
+        if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("../service-worker.js");
+        }
     },
     methods: {
 

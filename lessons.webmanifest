@@ -1,0 +1,30 @@
+{
+    "name": "Lessons App PWA",
+    "short_name": "lessons-store",
+    "description": "Lessons app webstore",
+    "icons": [
+        {
+            "src": "images/icon32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "images/icon512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/frontend/public/app.html",
+    "display": "fullscreen",
+    "background_color": "#260bca",
+    "form-factor": "desktop",
+    "screenshots": [
+        {
+            "src": "images/icon512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "form_factor": "wide",
+            "label": "Application"
+        }
+    ]
+}
