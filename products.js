@@ -31,7 +31,7 @@ let products = [
         name: "Biology Lesson",
         location: "Colindale",
         price: 120,
-        img: frontend/images/biology.png",
+        img: "frontend/images/biology.png",
         text: "Biology icon",
         invQuantity: 5
     },
