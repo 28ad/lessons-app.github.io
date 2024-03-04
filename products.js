@@ -4,7 +4,7 @@ let products = [
         name: "Maths Lesson",
         location: "Mill Hill",
         price: 200,
-        img: "../images/mathslesson.png",
+        img: "frontend/images/mathslesson.png",
         text: "Maths icon",
         invQuantity: 5
     },
